@@ -3,22 +3,18 @@ package com.brodacki.janusz.changemanagement.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "questions")
 public class Question {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
-
-    private String contentQuestion;
+    Integer id;
+    String content;
 
     @JsonIgnore
-    @ManyToMany(mappedBy = "questionList")
-    private List<Document> documentList = new ArrayList<>();
+    @ManyToMany(mappedBy = "questions")
+    private List<Document> documents;
 
     public Question() {
     }
@@ -31,20 +27,19 @@ public class Question {
         this.id = id;
     }
 
-    public String getContentQuestion() {
-        return contentQuestion;
+    public String getContent() {
+        return content;
     }
 
-    public void setContentQuestion(String contentQuestion) {
-        this.contentQuestion = contentQuestion;
+    public void setContent(String content) {
+        this.content = content;
     }
 
-    public List<Document> getDocumentList() {
-        return documentList;
+    public List<Document> getDocuments() {
+        return documents;
     }
 
-    public void setDocumentList(List<Document> documentList) {
-        this.documentList = documentList;
+    public void setDocuments(List<Document> documents) {
+        this.documents = documents;
     }
-
 }

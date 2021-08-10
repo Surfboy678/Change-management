@@ -1,34 +1,29 @@
 package com.brodacki.janusz.changemanagement.model;
 
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.List;
 
+
 @Entity
-@Table(name = "documents")
 public class Document {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-   private Integer id;
+    private Integer id;
 
-   private String type;
+    @Enumerated(EnumType.STRING)
+    private DocumentType type;
 
-    @ManyToMany(cascade = {
-            CascadeType.PERSIST,
-            CascadeType.MERGE
-    })
-    @JoinTable(name = "document_question",
-            joinColumns = @JoinColumn(name = "document_id"),
-            inverseJoinColumns = @JoinColumn(name = "question_id")
+
+    @ManyToMany
+    @JoinTable(
+            joinColumns = {@JoinColumn(name = "id_document")},
+            inverseJoinColumns = {@JoinColumn(name = "id_question")}
     )
-   private List<Question> questionList = new ArrayList<>();
-
-    @OneToMany(mappedBy = "document",
-            cascade = CascadeType.ALL,
-            orphanRemoval = true
-    )
-    private List<Answer> answerList = new ArrayList<>();
+    private List<Question> questions;
 
 
     public Document() {
@@ -42,27 +37,19 @@ public class Document {
         this.id = id;
     }
 
-    public String getType() {
+    public DocumentType getType() {
         return type;
     }
 
-    public void setType(String type) {
+    public void setType(DocumentType type) {
         this.type = type;
     }
 
-    public List<Question> getQuestionList() {
-        return questionList;
+    public List<Question> getQuestions() {
+        return questions;
     }
 
-    public void setQuestionList(List<Question> questionList) {
-        this.questionList = questionList;
-    }
-
-    public List<Answer> getAnswerList() {
-        return answerList;
-    }
-
-    public void setAnswerList(List<Answer> answerList) {
-        this.answerList = answerList;
+    public void setQuestions(List<Question> questions) {
+        this.questions = questions;
     }
 }
