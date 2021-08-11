@@ -16,6 +16,10 @@ public class Question {
     @ManyToMany(mappedBy = "questions")
     private List<Document> documents;
 
+    @OneToMany
+    @JoinColumn(name = "id_question")
+    private List<Answer> answers;
+
     public Question() {
     }
 
@@ -41,5 +45,13 @@ public class Question {
 
     public void setDocuments(List<Document> documents) {
         this.documents = documents;
+    }
+
+    public List<Answer> getAnswers() {
+        return answers;
+    }
+
+    public void setAnswers(List<Answer> answers) {
+        this.answers = answers;
     }
 }

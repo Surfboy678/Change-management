@@ -25,6 +25,11 @@ public class Document {
     )
     private List<Question> questions;
 
+    @OneToMany
+    @JsonIgnore
+    @JoinColumn(name = "id_document")
+    private List<Answer>answers;
+
 
     public Document() {
     }
@@ -51,5 +56,13 @@ public class Document {
 
     public void setQuestions(List<Question> questions) {
         this.questions = questions;
+    }
+
+    public List<Answer> getAnswers() {
+        return answers;
+    }
+
+    public void setAnswers(List<Answer> answers) {
+        this.answers = answers;
     }
 }
