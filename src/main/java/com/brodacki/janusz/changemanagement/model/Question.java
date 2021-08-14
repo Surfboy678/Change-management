@@ -16,9 +16,11 @@ public class Question {
     @ManyToMany(mappedBy = "questions")
     private List<Document> documents;
 
-    @OneToMany
-    @JoinColumn(name = "id_question")
-    private List<Answer> answers;
+    ////@OneToMany
+    //@JoinColumn(name = "id_question")
+    //private List<Answer> answers;
+    @OneToOne(fetch = FetchType.LAZY)
+    private Answer answer;
 
     public Question() {
     }
@@ -47,11 +49,18 @@ public class Question {
         this.documents = documents;
     }
 
-    public List<Answer> getAnswers() {
-        return answers;
+    public Answer getAnswer() {
+        return answer;
     }
 
-    public void setAnswers(List<Answer> answers) {
-        this.answers = answers;
+    public void setAnswer(Answer answer) {
+        this.answer = answer;
     }
+// public List<Answer> getAnswers() {
+   //     return answers;
+    //}
+
+   // public void setAnswers(List<Answer> answers) {
+   //     this.answers = answers;
+   // }
 }

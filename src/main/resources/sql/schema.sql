@@ -9,6 +9,7 @@ PRIMARY KEY (id)
 CREATE TABLE question(
 id  SERIAL NOT NULL ,
 content varchar(500) NULL,
+answer_id INT NULL,
 PRIMARY KEY (id)
 );
 
@@ -35,11 +36,14 @@ VALUES
 (2, 'EMERGENCY'),
 (3, 'DAILY_ROUTINES');
 
-INSERT INTO question(id, content)
+INSERT INTO question(id, content, answer_id)
 VALUES
-(1, 'Czy aplikacja jest komercyjna?'),
 (2, 'Czy praca planowa została przetestowana'),
 (3, 'Czy znany jest rollback w przypadku niepowodzenia pracy');
+
+INSERT INTO question(id, content, answer_id)
+VALUES
+(1, 'Czy aplikacja jest komercyjna?', 1);
 
 INSERT INTO document_questions(id_document, id_question)
 VALUES
